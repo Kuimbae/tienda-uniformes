@@ -1,7 +1,7 @@
-import logo from '../assets/react.svg'; // Cambia la ruta si tu logo está en otra ubicación
+import logo from '/home/guarani/tienda-uniformes/imagen/Sofia.svg';
 
 export default function Logo() {
   return (
-    <img src={logo} alt="Logo" className="h-12 w-12 object-contain" />
+    <img src={logo} alt="Logo" className="h-24 w-36 object-contain" />
   );
 }
