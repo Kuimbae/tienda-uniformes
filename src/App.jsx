@@ -25,7 +25,13 @@ function App() {
         <div className="absolute left-6 inset-y-0 my-auto flex items-center h-full">
           <Logo />
         </div>
-        <h1 className="flex-1 text-5xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic">
+        <h1
+          className="flex-1 text-5xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic"
+          style={{
+            fontFamily:
+              '"Dancing Script", "Pacifico", "Great Vibes", "Satisfy", "Caveat", cursive',
+          }}
+        >
           Sofi Confecciones
         </h1>
         <div className="absolute right-6 top-6 flex items-center gap-4">
@@ -209,7 +215,12 @@ function Profile({ onClose }) {
           />
         </svg>
       </button>
-      <h2 className="text-xl font-bold mb-4 text-center text-blue-900 font-serif italic">
+      <h2
+        className="text-2xl font-extrabold mb-4 text-center text-blue-900 font-serif tracking-tight italic"
+        style={{
+          fontFamily: "serif, Georgia, Times, Times New Roman, Garamond",
+        }}
+      >
         Perfil de Usuario
       </h2>
       {msg && <div className="text-green-600 text-center mb-2">{msg}</div>}
