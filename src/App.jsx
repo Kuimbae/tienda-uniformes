@@ -53,12 +53,12 @@ function App() {
 
   return (
     <div className="min-h-full w-full bg-[#e5e7eb] p-0 flex flex-col justify-between items-center">
-      <header className="mb-10 bg-[#111112] bg-opacity-95 shadow-lg py-6 md:py-8 px-2 md:px-4 w-full flex flex-col md:flex-row items-center relative gap-2 md:gap-0">
-        <div className="relative w-full md:w-auto flex justify-center md:justify-start items-center h-20 md:h-full mb-2 md:mb-0">
-          <Logo className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32" />
+      <header className="mb-10 bg-[#111112] bg-opacity-95 shadow-lg py-6 md:py-8 px-2 md:px-4 w-full flex flex-col sm:flex-row items-center relative gap-2 md:gap-0">
+        <div className="relative w-full sm:w-1/4 flex justify-center sm:justify-start items-center h-20 sm:h-full mb-2 sm:mb-0">
+          <Logo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32" />
         </div>
         <h1
-          className="w-full md:flex-1 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic animate-pulse px-2 mb-2 md:mb-0 whitespace-nowrap overflow-hidden text-ellipsis"
+          className="w-full sm:w-1/2 flex-shrink text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic animate-pulse px-2 mb-2 sm:mb-0 whitespace-nowrap overflow-hidden text-ellipsis"
           style={{
             fontFamily:
               '"Lobster", "Dancing Script", "Pacifico", "Great Vibes", "Satisfy", "Caveat", cursive',
@@ -71,21 +71,21 @@ function App() {
         </h1>
         {/* Buscador responsive */}
         <form
-          className="w-full md:w-auto flex justify-center md:absolute md:right-56 md:top-0 md:h-full items-center order-3 md:order-none mt-2 md:mt-0 max-w-xs md:max-w-none"
+          className="w-full sm:w-1/4 flex justify-center sm:justify-end items-center order-3 sm:order-none mt-2 sm:mt-0 max-w-xs sm:max-w-[180px] md:max-w-[220px]"
           onSubmit={handleSearchSubmit}
         >
-          <div className="flex items-center bg-white border border-gray-300 rounded-full w-full max-w-xs md:min-w-[200px] md:max-w-[260px] shadow-sm overflow-hidden">
+          <div className="flex items-center bg-white border border-gray-300 rounded-full w-full max-w-xs sm:max-w-[180px] md:min-w-[180px] md:max-w-[220px] shadow-sm overflow-hidden">
             <input
               type="text"
               value={search}
               onChange={handleSearchChange}
               placeholder="Buscar producto..."
-              className="px-2 md:px-4 py-2 bg-white text-gray-800 border-none rounded-full focus:outline-none focus:ring-0 flex-1 text-sm md:text-base min-w-0"
+              className="px-2 sm:px-3 md:px-4 py-2 bg-white text-gray-800 border-none rounded-full focus:outline-none focus:ring-0 flex-1 text-sm sm:text-base md:text-base min-w-0"
               style={{ borderRight: 'none' }}
             />
             <button
               type="submit"
-              className="flex items-center justify-center px-2 md:px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-white border-none rounded-full"
+              className="flex items-center justify-center px-2 sm:px-3 md:px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-white border-none rounded-full"
               aria-label="Buscar"
               style={{ borderLeft: '1px solid #d1d5db' }}
             >
@@ -106,7 +106,7 @@ function App() {
             </button>
           </div>
         </form>
-        <div className="w-full md:w-40 flex justify-center md:justify-end items-center gap-2 md:gap-4 md:static right-2 md:right-6 top-0 h-full mt-2 md:mt-0 z-10 order-3 md:order-none relative">
+        <div className="w-full sm:w-1/4 md:w-40 flex justify-center sm:justify-end items-center gap-2 md:gap-4 md:static right-2 md:right-6 top-0 h-full mt-2 sm:mt-0 md:mt-0 z-10 order-3 sm:order-none relative">
           {!showLogin && !window.localStorage.getItem("userProfile") && (
             <div className="w-auto flex justify-center">
               <EntrarButton onClick={() => setShowLogin(true)} />
