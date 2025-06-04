@@ -9,6 +9,13 @@ export default function Footer() {
             <path d="M31.5 24h-5v12h-5V24h-3v-4h3v-2.5c0-3.1 1.7-5 5-5 1.4 0 2.9.1 3 .1v4h-2c-1.1 0-1.5.5-1.5 1.5V20h4.5l-.5 4z" fill="#fff"/>
           </svg>
         </a>
+        {/* WhatsApp: icono colorido y moderno */}
+        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg className="w-8 h-8 hover:scale-110 transition-transform" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="24" fill="#25D366"/>
+            <path d="M34.6 29.2c-.5-.2-2.7-1.3-3.1-1.5-.4-.2-.7-.2-1 .2-.3.4-1.1 1.3-1.3 1.5-.2.2-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.5-.7.2-.3.1-.5 0-.7-.1-.2-1-2.4-1.4-3.3-.4-.9-.7-.8-1-.8h-.8c-.3 0-.7.1-1.1.5-.4.4-1.5 1.5-1.5 3.6s1.5 4.2 1.7 4.5c.2.3 3 4.6 7.3 6.2.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.4-.2-.8-.4z" fill="#fff"/>
+          </svg>
+        </a>
         {/* Instagram: icono gradiente */}
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg className="w-8 h-8 hover:scale-110 transition-transform" viewBox="0 0 48 48">
