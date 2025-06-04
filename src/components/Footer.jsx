@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full mt-8 py-4 text-center text-gray-100 text-sm border-t bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 flex flex-col items-center gap-2">
+    <footer className="w-full mt-8 py-4 text-center text-gray-100 text-sm border-t bg-black bg-opacity-80 flex flex-col items-center gap-2">
       <div className="flex gap-6 justify-center mb-1">
         {/* Facebook: icono colorido y moderno */}
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">

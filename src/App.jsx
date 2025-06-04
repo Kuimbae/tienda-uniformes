@@ -53,15 +53,17 @@ function App() {
 
   return (
     <div className="min-h-full w-full bg-gradient-to-br from-blue-100 via-white to-blue-200 p-0 flex flex-col justify-between items-center">
-      <header className="mb-10 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 shadow-lg py-8 px-4 w-full flex items-center relative">
+      <header className="mb-10 bg-black bg-opacity-80 shadow-lg py-8 px-4 w-full flex items-center relative">
         <div className="absolute left-6 inset-y-0 my-auto flex items-center h-full">
           <Logo />
         </div>
         <h1
-          className="flex-1 text-5xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic"
+          className="flex-1 text-6xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic animate-pulse"
           style={{
             fontFamily:
-              '"Dancing Script", "Pacifico", "Great Vibes", "Satisfy", "Caveat", cursive',
+              '"Lobster", "Dancing Script", "Pacifico", "Great Vibes", "Satisfy", "Caveat", cursive',
+            letterSpacing: '0.08em',
+            textShadow: '0 4px 16px #0006',
           }}
         >
           Sofi Confecciones
@@ -180,7 +182,7 @@ function App() {
       <Modal open={showEmbroidery} onClose={() => setShowEmbroidery(false)}>
         <EmbroiderySelector />
       </Modal>
-      <Footer />
+      <Footer className="bg-black bg-opacity-80" />
     </div>
   );
 }
