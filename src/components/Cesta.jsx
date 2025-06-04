@@ -87,20 +87,25 @@ export default function Cesta({ open, onClose }) {
       </div>
       <div className="p-4 border-t flex flex-col gap-2">
         {cart.length > 0 && (
-          <div className="flex justify-between items-center mb-2">
-            <span className="font-semibold text-gray-700">Total:</span>
-            <span className="text-lg font-bold text-gray-900">
-              ${cart.reduce((acc, item) => acc + item.price * (item.quantity || 1), 0).toFixed(2)}
-            </span>
-          </div>
+          <>
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-semibold text-gray-700">Total:</span>
+              <span className="text-lg font-bold text-gray-900">
+                ${cart.reduce((acc, item) => acc + item.price * (item.quantity || 1), 0).toFixed(2)}
+              </span>
+            </div>
+            <button
+              className="bg-blue-700 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition mb-2"
+              onClick={() => {
+                // Navegación interna a la página de resumen de la cesta
+                window.location.hash = '#/cesta';
+                onClose();
+              }}
+            >
+              Ver artículos en tu cesta
+            </button>
+          </>
         )}
-        <button
-          className="bg-red-600 text-white px-4 py-2 rounded font-semibold hover:bg-red-700 transition mb-2"
-          onClick={clearCart}
-          disabled={cart.length === 0}
-        >
-          Limpiar cesta
-        </button>
       </div>
     </div>
   );
