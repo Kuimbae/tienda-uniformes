@@ -34,9 +34,11 @@ function App() {
         >
           Sofi Confecciones
         </h1>
-        <div className="absolute right-6 top-6 flex items-center gap-4">
+        <div className="absolute right-6 top-0 h-full flex items-center gap-4 w-40 justify-center">
           {!showLogin && !window.localStorage.getItem("userProfile") && (
-            <EntrarButton onClick={() => setShowLogin(true)} />
+            <div className="w-full flex justify-center">
+              <EntrarButton onClick={() => setShowLogin(true)} />
+            </div>
           )}
           {window.localStorage.getItem("userProfile") && <UserMenu />}
         </div>
