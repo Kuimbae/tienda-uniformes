@@ -129,7 +129,7 @@ function App() {
         {/* Botón flotante para abrir la cesta */}
         <button
           ref={cartButtonRef}
-          className="fixed bottom-24 right-8 z-50 bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition flex items-center gap-2"
+          className="fixed right-4 z-50 bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition flex items-center gap-2 bottom-40 md:bottom-8"
           onClick={() => setShowCart(true)}
         >
           <svg
@@ -157,7 +157,7 @@ function App() {
         </button>
         {/* El botón flotante para elegir bordado permanece igual */}
         <button
-          className="fixed bottom-8 right-8 z-50 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition flex items-center gap-2"
+          className="fixed right-4 z-50 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition flex items-center gap-2 bottom-24 md:bottom-24"
           onClick={() => setShowEmbroidery(true)}
         >
           <svg
