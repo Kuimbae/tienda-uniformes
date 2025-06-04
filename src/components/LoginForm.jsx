@@ -33,7 +33,7 @@ export default function LoginForm({ onLogin }) {
   };
 
   if (showRegister) {
-    return <RegisterForm onBack={() => setShowRegister(false)} />;
+    return <RegisterForm onBack={() => setShowRegister(false)} onRegister={onLogin} />;
   }
 
   return (

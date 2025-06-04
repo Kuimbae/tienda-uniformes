@@ -1,12 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useProductStore } from '../store/useProductStore.jsx';
 
-export default function ProductCatalog() {
+export default function ProductCatalog({ onAddToCart }) {
   const { products, fetchProducts, addToCart, isLoading, error } = useProductStore();
+  const [addedId, setAddedId] = useState(null);
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const handleAdd = (product) => {
+    if (onAddToCart) {
+      onAddToCart(product, addToCart);
+    } else {
+      addToCart(product);
+    }
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1000);
+  };
 
   if (isLoading) return <div className="p-6">Cargando productos...</div>;
   if (error) return <div className="p-6 text-red-500">{error}</div>;
@@ -25,10 +36,11 @@ export default function ProductCatalog() {
             <p className="font-semibold text-sm">{product.title}</p>
             <p className="text-sm text-gray-500">${product.price}</p>
             <button
-              onClick={() => addToCart(product)}
-              className="mt-2 bg-blue-800 text-white px-4 py-1 rounded text-sm"
+              onClick={() => handleAdd(product)}
+              className={`mt-2 bg-blue-800 text-white px-4 py-1 rounded text-sm transition ${addedId === product.id ? 'bg-green-600' : ''}`}
+              disabled={addedId === product.id}
             >
-              Agregar
+              {addedId === product.id ? '¡Agregado!' : 'Agregar'}
             </button>
           </div>
         ))}
