@@ -39,6 +39,10 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    if (!search.trim()) {
+      window.alert("Por favor, introduce un término de búsqueda.");
+      return;
+    }
     setSearchActive(true);
   };
 
@@ -67,18 +71,20 @@ function App() {
           className="absolute right-56 top-0 h-full flex items-center"
           onSubmit={handleSearchSubmit}
         >
-          <div className="flex items-center bg-gray-100 border border-gray-300 rounded overflow-hidden min-w-[180px]">
+          <div className="flex items-center bg-white border border-gray-300 rounded-full min-w-[200px] shadow-sm overflow-hidden">
             <input
               type="text"
               value={search}
               onChange={handleSearchChange}
               placeholder="Buscar producto..."
-              className="px-3 py-2 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 flex-1"
+              className="px-4 py-2 bg-white text-gray-800 border-none rounded-full focus:outline-none focus:ring-0 flex-1"
+              style={{ borderRight: 'none' }}
             />
             <button
               type="submit"
-              className="flex items-center justify-center px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-gray-100"
+              className="flex items-center justify-center px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-white border-none rounded-full"
               aria-label="Buscar"
+              style={{ borderLeft: '1px solid #d1d5db' }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
