@@ -8,6 +8,15 @@ export default function CestaResumen() {
   const [mostrarPago, setMostrarPago] = useState(false);
   const [metodoPago, setMetodoPago] = useState("");
 
+  // Obtener datos del usuario desde localStorage
+  const user = (() => {
+    try {
+      return JSON.parse(window.localStorage.getItem("userProfile")) || {};
+    } catch {
+      return {};
+    }
+  })();
+
   const handlePedido = () => {
     setMostrarPago(true);
   };
@@ -26,6 +35,18 @@ export default function CestaResumen() {
       <div className="flex flex-col items-center mb-6">
         <img src="/imagen/Sofia.svg" alt="Logo Sofi Confecciones" className="w-32 h-32 object-contain mb-2 print:mb-0" />
         <h2 className="text-2xl font-bold text-blue-900 text-center print:mt-2">Artículos en tu cesta</h2>
+      </div>
+      {/* Datos del usuario para la factura */}
+      <div className="mb-6 border rounded-lg p-4 bg-gray-50 print:bg-white print:border print:p-2">
+        <h3 className="font-bold text-gray-800 mb-2 text-lg">Datos del cliente</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 text-gray-700 text-sm">
+          <div><span className="font-semibold">Usuario:</span> {user.username || "-"}</div>
+          <div><span className="font-semibold">Nombre:</span> {user.firstName || "-"}</div>
+          <div><span className="font-semibold">Apellido:</span> {user.lastName || "-"}</div>
+          <div><span className="font-semibold">Email:</span> {user.email || "-"}</div>
+          <div><span className="font-semibold">Teléfono:</span> {user.phone || "-"}</div>
+          <div className="md:col-span-2"><span className="font-semibold">Dirección:</span> {user.address || "-"}</div>
+        </div>
       </div>
       {cart.length === 0 ? (
         <div className="text-gray-500 text-center">Tu cesta está vacía.</div>
