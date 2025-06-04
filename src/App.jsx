@@ -20,8 +20,8 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-br from-blue-100 via-white to-blue-200 p-0 flex flex-col justify-between items-center">
-      <header className="mb-10 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 shadow-lg rounded-r-xl py-8 px-4 w-full flex items-center relative">
+    <div className="min-h-full w-full bg-gradient-to-br from-blue-100 via-white to-blue-200 p-0 flex flex-col justify-between items-center">
+      <header className="mb-10 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 shadow-lg py-8 px-4 w-full flex items-center relative">
         <div className="absolute left-6 inset-y-0 my-auto flex items-center h-full">
           <Logo />
         </div>
@@ -48,7 +48,7 @@ function App() {
         <Profile onClose={() => setShowProfile(false)} />
       </Modal>
 
-      <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8">
+      <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8 overflow-x-hidden">
         <div className="transition-shadow hover:shadow-2xl rounded-xl flex-1 md:w-2/3 lg:w-2/3 w-full">
           <ProductCatalog />
         </div>
