@@ -14,6 +14,8 @@ function App() {
   const [showEmbroidery, setShowEmbroidery] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchActive, setSearchActive] = useState(false);
   const cartButtonRef = useRef();
   const { cart } = useProductStore();
 
@@ -30,6 +32,21 @@ function App() {
     setShowCart(true);
   };
 
+  // Filtrado de productos para el catálogo
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchActive(true);
+  };
+
+  // Cuando se cambia el texto de búsqueda, desactiva el estado de búsqueda activa
+  useEffect(() => {
+    if (search === "") setSearchActive(false);
+  }, [search]);
+
   return (
     <div className="min-h-full w-full bg-gradient-to-br from-blue-100 via-white to-blue-200 p-0 flex flex-col justify-between items-center">
       <header className="mb-10 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 shadow-lg py-8 px-4 w-full flex items-center relative">
@@ -45,6 +62,41 @@ function App() {
         >
           Sofi Confecciones
         </h1>
+        {/* Buscador con icono de lupa a la derecha, integrados */}
+        <form
+          className="absolute right-56 top-0 h-full flex items-center"
+          onSubmit={handleSearchSubmit}
+        >
+          <div className="flex items-center bg-gray-100 border border-gray-300 rounded overflow-hidden min-w-[180px]">
+            <input
+              type="text"
+              value={search}
+              onChange={handleSearchChange}
+              placeholder="Buscar producto..."
+              className="px-3 py-2 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 flex-1"
+            />
+            <button
+              type="submit"
+              className="flex items-center justify-center px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-gray-100"
+              aria-label="Buscar"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
         <div className="absolute right-6 top-0 h-full flex items-center gap-4 w-40 justify-center">
           {!showLogin && !window.localStorage.getItem("userProfile") && (
             <div className="w-full flex justify-center">
@@ -63,7 +115,7 @@ function App() {
 
       <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8 overflow-x-hidden">
         <div className="transition-shadow hover:shadow-2xl rounded-xl flex-1 md:w-2/3 lg:w-2/3 w-full">
-          <ProductCatalog onAddToCart={handleAddAndShowCart} />
+          <ProductCatalog onAddToCart={handleAddAndShowCart} search={searchActive ? search : ""} />
         </div>
         {/* Botón flotante para abrir la cesta */}
         <button
