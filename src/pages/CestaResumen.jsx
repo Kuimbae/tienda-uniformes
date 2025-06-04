@@ -16,6 +16,7 @@ export default function CestaResumen() {
       return {};
     }
   })();
+  const isLogged = !!user && !!user.username;
 
   const handlePedido = () => {
     setMostrarPago(true);
@@ -74,8 +75,10 @@ export default function CestaResumen() {
       {cart.length > 0 && !mostrarPago && (
         <div className="flex flex-col md:flex-row gap-3 justify-center mt-4">
           <button
-            className="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition"
+            className="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition disabled:opacity-50"
             onClick={handlePedido}
+            disabled={!isLogged}
+            title={!isLogged ? 'Debes iniciar sesión para realizar un pedido' : ''}
           >
             Realizar pedido
           </button>
@@ -85,6 +88,11 @@ export default function CestaResumen() {
           >
             Imprimir factura
           </button>
+        </div>
+      )}
+      {!isLogged && (
+        <div className="text-red-600 text-center mt-2 font-semibold text-sm">
+          Debes iniciar sesión para realizar un pedido.
         </div>
       )}
       {mostrarPago && (
