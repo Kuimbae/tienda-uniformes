@@ -53,9 +53,9 @@ function App() {
 
   return (
     <div className="min-h-full w-full bg-gradient-to-br from-blue-100 via-white to-blue-200 p-0 flex flex-col justify-between items-center">
-      <header className="mb-10 bg-black bg-opacity-80 shadow-lg py-8 px-4 w-full flex items-center relative">
+      <header className="mb-10 bg-[#111112] bg-opacity-95 shadow-lg py-8 px-4 w-full flex items-center relative">
         <div className="absolute left-6 inset-y-0 my-auto flex items-center h-full">
-          <Logo />
+          <Logo className="w-24 h-24 md:w-32 md:h-32" />
         </div>
         <h1
           className="flex-1 text-6xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight font-serif italic animate-pulse"
