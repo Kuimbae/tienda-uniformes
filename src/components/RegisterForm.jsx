@@ -100,7 +100,7 @@ export default function RegisterForm({ onBack, onRegister }) {
         <input
           type="text"
           placeholder="Usuario"
-          className="w-full p-2 mb-3 border border-gray-300 rounded"
+          className="w-full p-2 mb-3 border border-gray-300 rounded bg-white text-gray-900"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -108,7 +108,7 @@ export default function RegisterForm({ onBack, onRegister }) {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 mb-3 border border-gray-300 rounded"
+          className="w-full p-2 mb-3 border border-gray-300 rounded bg-white text-gray-900"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -116,7 +116,7 @@ export default function RegisterForm({ onBack, onRegister }) {
         <input
           type="password"
           placeholder="Contraseña"
-          className="w-full p-2 mb-3 border border-gray-300 rounded"
+          className="w-full p-2 mb-3 border border-gray-300 rounded bg-white text-gray-900"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -124,7 +124,7 @@ export default function RegisterForm({ onBack, onRegister }) {
         <input
           type="password"
           placeholder="Confirmar contraseña"
-          className="w-full p-2 mb-4 border border-gray-300 rounded"
+          className="w-full p-2 mb-4 border border-gray-300 rounded bg-white text-gray-900"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
