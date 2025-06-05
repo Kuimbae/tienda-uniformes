@@ -72,115 +72,118 @@ export default function CestaResumen() {
           <span className="text-xl font-bold text-gray-900">${total.toFixed(2)}</span>
         </div>
       )}
-      {cart.length > 0 && !mostrarPago && (
-        <div className="flex flex-col md:flex-row gap-3 justify-center mt-4">
-          <button
-            className="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition disabled:opacity-50"
-            onClick={handlePedido}
-            disabled={!isLogged}
-            title={!isLogged ? 'Debes iniciar sesión para realizar un pedido' : ''}
-          >
-            Realizar pedido
-          </button>
+      {/* Solo mostrar botones y mensajes si no es impresión */}
+      <div className="print:hidden">
+        {cart.length > 0 && !mostrarPago && (
+          <div className="flex flex-col md:flex-row gap-3 justify-center mt-4">
+            <button
+              className="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition disabled:opacity-50"
+              onClick={handlePedido}
+              disabled={!isLogged}
+              title={!isLogged ? 'Debes iniciar sesión para realizar un pedido' : ''}
+            >
+              Realizar pedido
+            </button>
+            <button
+              className="bg-blue-700 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition"
+              onClick={handleImprimir}
+            >
+              Imprimir factura
+            </button>
+          </div>
+        )}
+        {!isLogged && (
+          <div className="text-red-600 text-center mt-2 font-semibold text-sm">
+            Debes iniciar sesión para realizar un pedido.
+          </div>
+        )}
+        {mostrarPago && (
+          <div className="mt-6 flex flex-col items-center gap-4">
+            <div className="text-lg font-semibold text-gray-800">Selecciona el método de pago:</div>
+            <div className="flex flex-col gap-2 w-full max-w-xs">
+              <label className="flex items-center gap-2 text-gray-800 font-medium">
+                <input
+                  type="radio"
+                  name="metodoPago"
+                  value="Banco"
+                  checked={metodoPago === "Banco"}
+                  onChange={() => setMetodoPago("Banco")}
+                  className="accent-blue-700 hidden"
+                />
+                <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Banco" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>🏦</span>
+                Transferencia bancaria
+              </label>
+              <label className="flex items-center gap-2 text-gray-800 font-medium">
+                <input
+                  type="radio"
+                  name="metodoPago"
+                  value="PayPal"
+                  checked={metodoPago === "PayPal"}
+                  onChange={() => setMetodoPago("PayPal")}
+                  className="accent-blue-700 hidden"
+                />
+                <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "PayPal" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💸</span>
+                PayPal
+              </label>
+              <label className="flex items-center gap-2 text-gray-800 font-medium">
+                <input
+                  type="radio"
+                  name="metodoPago"
+                  value="Tarjeta"
+                  checked={metodoPago === "Tarjeta"}
+                  onChange={() => setMetodoPago("Tarjeta")}
+                  className="accent-blue-700 hidden"
+                />
+                <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Tarjeta" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💳</span>
+                Tarjeta de crédito/débito
+              </label>
+              <label className="flex items-center gap-2 text-gray-800 font-medium">
+                <input
+                  type="radio"
+                  name="metodoPago"
+                  value="Bizum"
+                  checked={metodoPago === "Bizum"}
+                  onChange={() => setMetodoPago("Bizum")}
+                  className="accent-blue-700 hidden"
+                />
+                <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Bizum" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>📲</span>
+                Bizum
+              </label>
+              <label className="flex items-center gap-2 text-gray-800 font-medium">
+                <input
+                  type="radio"
+                  name="metodoPago"
+                  value="Contra reembolso"
+                  checked={metodoPago === "Contra reembolso"}
+                  onChange={() => setMetodoPago("Contra reembolso")}
+                  className="accent-blue-700 hidden"
+                />
+                <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Contra reembolso" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💵</span>
+                Contra reembolso
+              </label>
+            </div>
+            <button
+              className="mt-4 bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition disabled:opacity-50"
+              onClick={handleConfirmarPago}
+              disabled={!metodoPago}
+            >
+              Confirmar pedido
+            </button>
+          </div>
+        )}
+        {pedidoRealizado && (
+          <div className="mt-6 text-green-700 text-center font-bold">¡Pedido realizado con éxito!</div>
+        )}
+        <div className="mt-8 text-center">
           <button
             className="bg-blue-700 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition"
-            onClick={handleImprimir}
+            onClick={() => {
+              window.location.hash = "#";
+            }}
           >
-            Imprimir factura
+            Volver a la tienda
           </button>
         </div>
-      )}
-      {!isLogged && (
-        <div className="text-red-600 text-center mt-2 font-semibold text-sm">
-          Debes iniciar sesión para realizar un pedido.
-        </div>
-      )}
-      {mostrarPago && (
-        <div className="mt-6 flex flex-col items-center gap-4">
-          <div className="text-lg font-semibold text-gray-800">Selecciona el método de pago:</div>
-          <div className="flex flex-col gap-2 w-full max-w-xs">
-            <label className="flex items-center gap-2 text-gray-800 font-medium">
-              <input
-                type="radio"
-                name="metodoPago"
-                value="Banco"
-                checked={metodoPago === "Banco"}
-                onChange={() => setMetodoPago("Banco")}
-                className="accent-blue-700 hidden"
-              />
-              <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Banco" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>🏦</span>
-              Transferencia bancaria
-            </label>
-            <label className="flex items-center gap-2 text-gray-800 font-medium">
-              <input
-                type="radio"
-                name="metodoPago"
-                value="PayPal"
-                checked={metodoPago === "PayPal"}
-                onChange={() => setMetodoPago("PayPal")}
-                className="accent-blue-700 hidden"
-              />
-              <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "PayPal" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💸</span>
-              PayPal
-            </label>
-            <label className="flex items-center gap-2 text-gray-800 font-medium">
-              <input
-                type="radio"
-                name="metodoPago"
-                value="Tarjeta"
-                checked={metodoPago === "Tarjeta"}
-                onChange={() => setMetodoPago("Tarjeta")}
-                className="accent-blue-700 hidden"
-              />
-              <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Tarjeta" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💳</span>
-              Tarjeta de crédito/débito
-            </label>
-            <label className="flex items-center gap-2 text-gray-800 font-medium">
-              <input
-                type="radio"
-                name="metodoPago"
-                value="Bizum"
-                checked={metodoPago === "Bizum"}
-                onChange={() => setMetodoPago("Bizum")}
-                className="accent-blue-700 hidden"
-              />
-              <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Bizum" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>📲</span>
-              Bizum
-            </label>
-            <label className="flex items-center gap-2 text-gray-800 font-medium">
-              <input
-                type="radio"
-                name="metodoPago"
-                value="Contra reembolso"
-                checked={metodoPago === "Contra reembolso"}
-                onChange={() => setMetodoPago("Contra reembolso")}
-                className="accent-blue-700 hidden"
-              />
-              <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 ${metodoPago === "Contra reembolso" ? 'border-blue-700 bg-blue-700 text-white' : 'border-gray-400 bg-white text-gray-400'}`}>💵</span>
-              Contra reembolso
-            </label>
-          </div>
-          <button
-            className="mt-4 bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition disabled:opacity-50"
-            onClick={handleConfirmarPago}
-            disabled={!metodoPago}
-          >
-            Confirmar pedido
-          </button>
-        </div>
-      )}
-      {pedidoRealizado && (
-        <div className="mt-6 text-green-700 text-center font-bold">¡Pedido realizado con éxito!</div>
-      )}
-      <div className="mt-8 text-center">
-        <button
-          className="bg-blue-700 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition"
-          onClick={() => {
-            window.location.hash = "#";
-          }}
-        >
-          Volver a la tienda
-        </button>
       </div>
     </div>
   );
