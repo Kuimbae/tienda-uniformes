@@ -8,6 +8,7 @@ import Modal from "./components/Modal.jsx";
 import EntrarButton from "./components/EntrarButton.jsx";
 import { useProductStore } from "./store/useProductStore.jsx";
 import Cesta from "./components/Cesta.jsx";
+import Carrusel from "./components/Carrusel.jsx";
 import './styles/marijoa.css';
 
 function App() {
@@ -113,6 +114,18 @@ function App() {
           {window.localStorage.getItem("userProfile") && <UserMenu />}
         </div>
       </header>
+      {/* Carrusel destacado */}
+      <div className="w-full flex justify-center mb-8">
+        <Carrusel
+          images={[
+            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 1" },
+            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 2" },
+            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 3" }
+          ]}
+          autoPlay={true}
+          height="260px"
+        />
+      </div>
       <Modal open={showLogin} onClose={() => setShowLogin(false)}>
         <LoginForm onLogin={() => setShowLogin(false)} />
       </Modal>
