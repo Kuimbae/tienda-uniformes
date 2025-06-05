@@ -60,16 +60,16 @@ function App() {
           <Logo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32" />
         </div>
         <h1
-          className="w-full sm:w-1/2 flex-shrink text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center drop-shadow-lg tracking-tight px-2 mb-2 sm:mb-0 pb-2 whitespace-nowrap overflow-hidden text-ellipsis"
+          className="w-full sm:w-1/2 flex-shrink text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black italic font-serif text-center drop-shadow-[0_8px_32px_rgba(230,0,126,0.25)] tracking-tight px-2 mb-2 sm:mb-0 pb-2 whitespace-nowrap overflow-hidden text-ellipsis animate-gradient bg-gradient-to-r from-pink-600 via-fuchsia-500 to-blue-500 bg-clip-text text-transparent uppercase relative"
           style={{
-            fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
-            color: '#222',
-            letterSpacing: '0.01em',
-            textShadow: 'none',
-            minWidth: 0
+            fontFamily: 'Playfair Display, Georgia, Times, Times New Roman, Garamond, serif',
+            letterSpacing: '0.06em',
+            minWidth: 0,
+            lineHeight: 1.1
           }}
         >
-          Sofi Confecciones
+          <span className="inline-block animate-bounce-slow">S</span>ofi <span className="inline-block animate-bounce-slow delay-150">C</span>onfecciones
+          <span className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-2/3 h-2 bg-gradient-to-r from-pink-400 via-fuchsia-400 to-blue-400 rounded-full blur-sm opacity-60" aria-hidden="true"></span>
         </h1>
         {/* Buscador responsive */}
         <form
