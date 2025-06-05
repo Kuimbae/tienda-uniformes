@@ -72,37 +72,34 @@ function App() {
         </h1>
         {/* Buscador responsive */}
         <form
-          className="w-full sm:w-1/4 flex justify-center sm:justify-end items-center order-3 sm:order-none mt-2 sm:mt-0 max-w-xs sm:max-w-[180px] md:max-w-[220px]"
+          className="w-full sm:w-1/3 flex justify-center sm:justify-center items-center order-3 sm:order-none mt-2 sm:mt-0 max-w-lg"
           onSubmit={handleSearchSubmit}
         >
-          <div className="flex items-center bg-white border border-gray-300 rounded-full w-full max-w-xs sm:max-w-[180px] md:min-w-[180px] md:max-w-[220px] shadow-sm overflow-hidden">
+          <div className="relative w-full max-w-lg">
             <input
               type="text"
               value={search}
               onChange={handleSearchChange}
               placeholder="Buscar producto..."
-              className="px-2 sm:px-3 md:px-4 py-2 bg-white text-gray-800 border-none rounded-full focus:outline-none focus:ring-0 flex-1 text-sm sm:text-base md:text-base min-w-0"
-              style={{ borderRight: 'none' }}
+              className="flex-1 py-2 pl-4 pr-12 bg-gray-100 text-gray-900 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 text-base shadow-sm min-w-0 w-full"
+              style={{}}
             />
             <button
               type="submit"
-              className="flex items-center justify-center px-2 sm:px-3 md:px-3 py-2 text-gray-500 hover:text-blue-700 focus:outline-none bg-white border-none rounded-full"
+              className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-pink-600 hover:bg-pink-700 transition text-white w-8 h-8 rounded-full shadow-sm"
               aria-label="Buscar"
-              style={{ borderLeft: '1px solid #d1d5db' }}
+              style={{padding:0}}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                stroke="white"
+                strokeWidth={2}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
-                />
+                <circle cx="11" cy="11" r="7" stroke="white" strokeWidth="2" />
+                <line x1="18" y1="18" x2="15.2" y2="15.2" stroke="white" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>
           </div>
