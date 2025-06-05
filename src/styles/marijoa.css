@@ -1,0 +1,135 @@
+/* marijoa.css - Inspiración visual Marijoa */
+:root {
+  --color-principal: #e6007e;
+  --color-header-bg: #fff;
+  --color-header-shadow: 0 2px 12px #0001;
+  --color-footer-bg: #f7f7f7;
+  --color-footer-text: #333;
+  --color-boton: #e6007e;
+  --color-boton-hover: #b8005f;
+  --color-badge: #e6007e;
+  --color-badge-text: #fff;
+  --color-input-bg: #f3f3f3;
+  --color-input-border: #e0e0e0;
+  --color-card-bg: #fff;
+  --color-card-shadow: 0 2px 8px #0001;
+  --color-card-border: #eee;
+  --color-titulo: #222;
+  --color-precio: #e6007e;
+  --color-link: #e6007e;
+  --color-link-hover: #b8005f;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background: #fafafa;
+  color: #222;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Header estilo Marijoa */
+header {
+  background: var(--color-header-bg) !important;
+  box-shadow: var(--color-header-shadow) !important;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  color: var(--color-titulo) !important;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
+  font-size: 2.2rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.01em;
+  text-shadow: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Buscador grande y centrado */
+header form {
+  max-width: 420px !important;
+  margin: 0 auto;
+}
+header input[type="text"] {
+  background: var(--color-input-bg) !important;
+  border: 1px solid var(--color-input-border) !important;
+  border-radius: 999px !important;
+  font-size: 1.1rem !important;
+  padding: 0.7em 1.2em !important;
+}
+
+/* Botón principal */
+button, .btn-principal {
+  background: var(--color-boton) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  box-shadow: 0 2px 8px #e6007e22;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, .btn-principal:hover {
+  background: var(--color-boton-hover) !important;
+  box-shadow: 0 4px 16px #e6007e33;
+}
+
+/* Badge carrito */
+.badge-cart {
+  background: var(--color-badge);
+  color: var(--color-badge-text);
+  border-radius: 999px;
+  font-size: 0.9em;
+  font-weight: 700;
+  padding: 0.2em 0.7em;
+  margin-left: 0.5em;
+}
+
+/* Tarjetas de producto */
+.product-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 1.2em;
+  box-shadow: var(--color-card-shadow);
+  padding: 1.2em;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.product-card:hover {
+  box-shadow: 0 6px 24px #e6007e22;
+  border: 1.5px solid var(--color-boton);
+}
+.product-card .precio {
+  color: var(--color-precio);
+  font-size: 1.3em;
+  font-weight: 800;
+}
+
+/* Footer estilo Marijoa */
+footer {
+  background: var(--color-footer-bg) !important;
+  color: var(--color-footer-text) !important;
+  border-top: 1px solid #eee;
+  font-size: 1rem;
+}
+footer a {
+  color: var(--color-link);
+  font-weight: 600;
+}
+footer a:hover {
+  color: var(--color-link-hover);
+}
+
+/* Responsive ajustes */
+@media (max-width: 640px) {
+  header h1 {
+    font-size: 1.3rem !important;
+  }
+  header form {
+    max-width: 100% !important;
+  }
+  .product-card {
+    padding: 0.7em;
+  }
+}

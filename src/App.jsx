@@ -8,6 +8,7 @@ import Modal from "./components/Modal.jsx";
 import EntrarButton from "./components/EntrarButton.jsx";
 import { useProductStore } from "./store/useProductStore.jsx";
 import Cesta from "./components/Cesta.jsx";
+import './styles/marijoa.css';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -58,12 +59,12 @@ function App() {
           <Logo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32" />
         </div>
         <h1
-          className="w-full sm:w-1/2 flex-shrink text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-gray-100 drop-shadow-lg tracking-tight px-2 mb-2 sm:mb-0 pb-2 whitespace-nowrap overflow-hidden text-ellipsis font-[Lobster,cursive] italic"
+          className="w-full sm:w-1/2 flex-shrink text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center drop-shadow-lg tracking-tight px-2 mb-2 sm:mb-0 pb-2 whitespace-nowrap overflow-hidden text-ellipsis"
           style={{
-            fontFamily:
-              'Lobster, "Dancing Script", "Pacifico", "Great Vibes", "Satisfy", "Caveat", cursive',
-            letterSpacing: '0.08em',
-            textShadow: '0 4px 16px #0006',
+            fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+            color: '#222',
+            letterSpacing: '0.01em',
+            textShadow: 'none',
             minWidth: 0
           }}
         >
