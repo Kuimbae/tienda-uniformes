@@ -151,7 +151,7 @@ function App() {
           </svg>
           Cesta
           {cart.length > 0 && (
-            <span className="ml-2 bg-red-600 text-white rounded-full px-2 py-0.5 text-xs font-bold min-w-6 text-center">
+            <span className="ml-2 bg-green-600 text-white rounded-full px-2 py-0.5 text-xs font-bold min-w-6 text-center">
               {cart.reduce((acc, item) => acc + (item.quantity || 1), 0)}
             </span>
           )}
