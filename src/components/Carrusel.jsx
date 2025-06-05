@@ -48,7 +48,8 @@ export default function HeroCarousel() {
         aria-label="Anterior"
         type="button"
       >
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M14.5 17l-5-5 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        {/* Icono flecha izquierda: chevron doble minimalista */}
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 19l-7-7 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
       <button
         className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-pink-600 hover:text-white text-pink-600 border-2 border-pink-600 shadow-lg rounded-full w-14 h-14 flex items-center justify-center transition-all duration-200 group"
@@ -57,7 +58,8 @@ export default function HeroCarousel() {
         aria-label="Siguiente"
         type="button"
       >
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M9.5 7l5 5-5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        {/* Icono flecha derecha: chevron doble minimalista */}
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M5 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
