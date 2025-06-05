@@ -1,75 +1,106 @@
-import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+import 'swiper/css/pagination'
+import { motion, AnimatePresence } from 'framer-motion'
 
-/**
- * Carrusel de imágenes simple y responsivo.
- * Props:
- * - images: array de URLs de imágenes [{src, alt}]
- * - autoPlay: boolean (opcional, autoplay cada 4s)
- * - height: altura del carrusel (ej: '300px')
- */
-export default function Carrusel({ images = [], autoPlay = false, height = "260px" }) {
-  const [current, setCurrent] = useState(0);
+const slides = [
+  {
+    image: '/img1.jpg',
+    title: 'Nueva Temporada',
+    description: 'Descubrí lo nuevo en moda femenina',
+    button: 'Ver colección',
+    color: '#e6007e',
+  },
+  {
+    image: '/img2.jpg',
+    title: 'Ofertas Especiales',
+    description: 'Descuentos de hasta el 50%',
+    button: 'Aprovechar ahora',
+    color: '#1e293b',
+  },
+  {
+    image: '/img3.jpg',
+    title: 'Estilo Único',
+    description: 'Lo mejor de la moda urbana',
+    button: 'Explorar',
+    color: '#0ea5e9',
+  },
+]
 
-  // Avanza al siguiente slide
-  const next = () => setCurrent((c) => (c + 1) % images.length);
-  // Retrocede al slide anterior
-  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
-
-  // Autoplay
-  useEffect(() => {
-    if (!autoPlay) return;
-    const timer = setInterval(next, 4000);
-    return () => clearInterval(timer);
-  }, [current, autoPlay, images.length]);
-
-  if (!images.length) return null;
-
+export default function HeroCarousel() {
   return (
-    <div
-      className="relative w-full h-[40vh] min-h-[220px] max-h-[600px] overflow-hidden flex items-center justify-center bg-white"
-      style={{ height: '40vh', maxHeight: '600px', minHeight: '220px', borderRadius: 0, boxShadow: 'none' }}
+    <Swiper
+      modules={[Autoplay, Pagination, EffectFade]}
+      effect="fade"
+      loop
+      autoplay={{ delay: 4000 }}
+      pagination={{ clickable: true, renderBullet: (i, className) => `<span class='${className} !w-5 !h-5 !rounded-full !bg-white !border-2 !border-pink-600 !mx-1'></span>` }}
+      className="w-full h-[600px]"
+      navigation={false}
     >
-      {/* Imágenes */}
-      {images.map((img, idx) => (
-        <img
-          key={idx}
-          src={img.src}
-          alt={img.alt || `Slide ${idx + 1}`}
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ${idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-          style={{ height: '100%', width: '100%' }}
-          draggable={false}
-        />
+      {/* Botones personalizados de desplazamiento */}
+      <button
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-pink-600 hover:text-white text-pink-600 border-2 border-pink-600 shadow-lg rounded-full w-14 h-14 flex items-center justify-center transition-all duration-200 group"
+        style={{ fontSize: 32 }}
+        onClick={() => document.querySelector('.swiper').swiper.slidePrev()}
+        aria-label="Anterior"
+        type="button"
+      >
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M14.5 17l-5-5 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      <button
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-pink-600 hover:text-white text-pink-600 border-2 border-pink-600 shadow-lg rounded-full w-14 h-14 flex items-center justify-center transition-all duration-200 group"
+        style={{ fontSize: 32 }}
+        onClick={() => document.querySelector('.swiper').swiper.slideNext()}
+        aria-label="Siguiente"
+        type="button"
+      >
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M9.5 7l5 5-5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      {slides.map((slide, index) => (
+        <SwiperSlide key={index}>
+          <div
+            className="w-full h-full bg-cover bg-center relative"
+            style={{ backgroundImage: `url(${slide.image})` }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slide.title}
+                initial={{ opacity: 0, scale: 0.96, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, scale: 1.04, filter: 'blur(8px)' }}
+                transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ background: `${slide.color}cc`, mixBlendMode: 'multiply' }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -60 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  className="text-center text-white space-y-4 px-4"
+                >
+                  <h2 className="text-4xl md:text-5xl font-bold drop-shadow-lg tracking-tight">
+                    {slide.title}
+                  </h2>
+                  <p className="text-lg md:text-xl font-medium drop-shadow">
+                    {slide.description}
+                  </p>
+                  <motion.button
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="mt-4 px-8 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
+                  >
+                    {slide.button}
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </SwiperSlide>
       ))}
-      {/* Flechas */}
-      <div className="absolute inset-0 flex items-center justify-between px-2 z-20 pointer-events-none">
-        <button
-          className="bg-white bg-opacity-80 hover:bg-pink-600 hover:text-white text-pink-600 border border-pink-200 shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition pointer-events-auto"
-          onClick={prev}
-          aria-label="Anterior"
-          style={{ fontSize: 24 }}
-        >
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M15.5 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </button>
-        <button
-          className="bg-white bg-opacity-80 hover:bg-pink-600 hover:text-white text-pink-600 border border-pink-200 shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition pointer-events-auto"
-          onClick={next}
-          aria-label="Siguiente"
-          style={{ fontSize: 24 }}
-        >
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M8.5 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </button>
-      </div>
-      {/* Indicadores */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-        {images.map((_, idx) => (
-          <button
-            key={idx}
-            className={`w-3 h-3 rounded-full border-2 ${idx === current ? 'bg-pink-600 border-pink-600' : 'bg-white border-gray-400'} transition`}
-            onClick={() => setCurrent(idx)}
-            aria-label={`Ir al slide ${idx + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
+    </Swiper>
+  )
 }
