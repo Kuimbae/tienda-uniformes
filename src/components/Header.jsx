@@ -87,10 +87,18 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                         <div className="text-xs text-gray-500 line-clamp-1">{product.description}</div>
                       </div>
                       <button
-                        className="bg-green-700 text-white px-3 py-1 rounded font-semibold text-xs hover:bg-green-800 transition"
+                        className={`bg-green-700 text-white px-3 py-1 rounded font-semibold text-xs hover:bg-green-800 transition`}
                         onClick={e => {
                           e.stopPropagation();
-                          onAddToCart(product);
+                          if (onAddToCart) {
+                            // Forzar el uso correcto de addToCart
+                            onAddToCart(product, (p) => {
+                              // fallback directo a store
+                              import('../store/useProductStore.jsx').then(mod => {
+                                mod.useProductStore.getState().addToCart(p);
+                              });
+                            });
+                          }
                         }}
                       >Añadir</button>
                     </div>
@@ -169,7 +177,11 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                       className="bg-green-700 text-white px-3 py-1 rounded font-semibold text-xs hover:bg-green-800 transition"
                       onClick={e => {
                         e.stopPropagation();
-                        onAddToCart(product);
+                        if (typeof onAddToCart === 'function') {
+                          onAddToCart(product, undefined);
+                        } else if (window.addToCart) {
+                          window.addToCart(product);
+                        }
                       }}
                     >Añadir</button>
                   </div>
