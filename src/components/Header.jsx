@@ -68,7 +68,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
               {showSearchResults && searchResults.length > 0 && (
                 <div
                   id="search-dropdown-panel"
-                  className="absolute left-0 top-12 w-[32rem] min-w-[20rem] max-w-[90vw] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-[28rem] overflow-y-auto mt-1"
+                  className="absolute left-0 top-12 translate-x-[-60%] w-[32rem] min-w-[20rem] max-w-[90vw] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-[28rem] overflow-y-auto mt-1"
                   style={{width: '32rem'}}
                 >
                   {searchResults.map((product) => (
