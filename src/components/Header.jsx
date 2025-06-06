@@ -34,7 +34,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
             <form
               className="flex flex-row items-center gap-1 sm:gap-2 w-full min-w-0 max-w-full relative"
               onSubmit={handleSearchSubmit}
-              style={{margin: 0, flex: 1}}
+              style={{margin: 0, flex: 1, justifyContent: 'flex-end'}}
             >
               <input
                 id="search-input-header"
@@ -43,7 +43,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                 onChange={onSearchChange}
                 placeholder="Buscar..."
                 className="flex-1 min-w-0 py-2 pl-4 pr-12 bg-gray-100 text-gray-900 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 text-base shadow-sm w-full !m-0"
-                style={{margin: 0, maxWidth: '100%'}}
+                style={{margin: 0, maxWidth: '100%', minWidth: '320px'}}
                 autoComplete="off"
               />
               <button
