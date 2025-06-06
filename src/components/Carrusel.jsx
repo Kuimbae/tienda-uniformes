@@ -7,21 +7,21 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const slides = [
   {
-    image: '/img1.jpg',
+    image: '/imagen/chica.jpg',
     title: 'Nueva Temporada',
     description: 'Descubrí lo nuevo en moda femenina',
     button: 'Ver colección',
     color: '#e6007e',
   },
   {
-    image: '/img2.jpg',
+    image: '/imagen/chico.jpg',
     title: 'Ofertas Especiales',
     description: 'Descuentos de hasta el 50%',
     button: 'Aprovechar ahora',
     color: '#1e293b',
   },
   {
-    image: '/img3.jpg',
+    image: '/imagen/oferta.jpg',
     title: 'Estilo Único',
     description: 'Lo mejor de la moda urbana',
     button: 'Explorar',
@@ -49,7 +49,7 @@ export default function HeroCarousel() {
         type="button"
       >
         {/* Icono flecha izquierda: chevron doble minimalista */}
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 19l-7-7 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /><path d="M19 19l-7-7 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
       <button
         className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-pink-600 hover:text-white text-pink-600 border-2 border-pink-600 shadow-lg rounded-full w-14 h-14 flex items-center justify-center transition-all duration-200 group"
@@ -59,7 +59,7 @@ export default function HeroCarousel() {
         type="button"
       >
         {/* Icono flecha derecha: chevron doble minimalista */}
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M5 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /><path d="M5 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
@@ -67,6 +67,12 @@ export default function HeroCarousel() {
             className="w-full h-full bg-cover bg-center relative"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
+            {/* Overlay de color semitransparente */}
+            <div
+              className="absolute inset-0"
+              style={{ backgroundColor: `${slide.color}66` }} 
+            ></div>
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.title}
@@ -75,25 +81,24 @@ export default function HeroCarousel() {
                 exit={{ opacity: 0, scale: 1.04, filter: 'blur(8px)' }}
                 transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute inset-0 flex items-center justify-center"
-                style={{ background: `${slide.color}cc`, mixBlendMode: 'multiply' }}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 60 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -60 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-center text-white space-y-4 px-4"
+                  className="text-center space-y-4 px-4"
                 >
-                  <h2 className="text-4xl md:text-5xl font-bold drop-shadow-lg tracking-tight">
+                  <h2 className="text-4xl md:text-5xl font-bold drop-shadow-lg tracking-tight text-white">
                     {slide.title}
                   </h2>
-                  <p className="text-lg md:text-xl font-medium drop-shadow">
+                  <p className="text-lg md:text-xl font-medium drop-shadow text-white">
                     {slide.description}
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.97 }}
-                    className="mt-4 px-8 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
+                    className="mt-4 px-8 py-3 bg-white/20 text-white font-semibold rounded-full shadow-lg hover:bg-white/40 border border-white transition"
                   >
                     {slide.button}
                   </motion.button>
@@ -102,6 +107,7 @@ export default function HeroCarousel() {
             </AnimatePresence>
           </div>
         </SwiperSlide>
+
       ))}
     </Swiper>
   )
