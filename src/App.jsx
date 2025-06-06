@@ -9,6 +9,7 @@ import EntrarButton from "./components/EntrarButton.jsx";
 import { useProductStore } from "./store/useProductStore.jsx";
 import Cesta from "./components/Cesta.jsx";
 import Carrusel from "./components/Carrusel.jsx";
+import Header from "./components/Header.jsx";
 import './styles/marijoa.css';
 
 function App() {
@@ -55,65 +56,14 @@ function App() {
 
   return (
     <div className="min-h-full w-full bg-[#e5e7eb] p-0 flex flex-col justify-between items-center">
-      <header className="mb-10 bg-[#111112] bg-opacity-95 shadow-lg py-6 md:py-8 px-2 md:px-4 w-full flex flex-col sm:flex-row items-center relative gap-2 md:gap-0">
-        <div className="relative w-full sm:w-1/4 flex justify-center sm:justify-start items-center h-20 sm:h-full mb-2 sm:mb-0">
-          <Logo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32" />
-        </div>
-        <h1
-          className="w-full sm:w-1/2 flex-shrink text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black italic font-serif text-center drop-shadow-[0_8px_32px_rgba(230,0,126,0.25)] tracking-tight px-2 mb-2 sm:mb-0 pb-2 whitespace-nowrap overflow-hidden text-ellipsis animate-gradient bg-gradient-to-r from-pink-600 via-fuchsia-500 to-blue-500 bg-clip-text text-transparent uppercase relative"
-          style={{
-            fontFamily: 'Playfair Display, Georgia, Times, Times New Roman, Garamond, serif',
-            letterSpacing: '0.06em',
-            minWidth: 0,
-            lineHeight: 1.1
-          }}
-        >
-          <span className="inline-block animate-bounce-slow">S</span>ofi <span className="inline-block animate-bounce-slow delay-150">C</span>onfecciones
-          <span className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-2/3 h-2 bg-gradient-to-r from-pink-400 via-fuchsia-400 to-blue-400 rounded-full blur-sm opacity-60" aria-hidden="true"></span>
-        </h1>
-        {/* Buscador responsive */}
-        <form
-          className="w-full sm:w-1/3 flex justify-center sm:justify-center items-center order-3 sm:order-none mt-2 sm:mt-0 max-w-lg"
-          onSubmit={handleSearchSubmit}
-        >
-          <div className="relative w-full max-w-lg">
-            <input
-              type="text"
-              value={search}
-              onChange={handleSearchChange}
-              placeholder="Buscar producto..."
-              className="flex-1 py-2 pl-4 pr-12 bg-gray-100 text-gray-900 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 text-base shadow-sm min-w-0 w-full"
-              style={{}}
-            />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center bg-pink-600 hover:bg-pink-700 transition text-white w-8 h-8 rounded-full shadow-sm"
-              aria-label="Buscar"
-              style={{padding:0}}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="white"
-                strokeWidth={2}
-              >
-                <circle cx="11" cy="11" r="7" stroke="white" strokeWidth="2" />
-                <line x1="18" y1="18" x2="15.2" y2="15.2" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
-        </form>
-        <div className="w-full sm:w-1/4 md:w-40 flex justify-center sm:justify-end items-center gap-2 md:gap-4 md:static right-2 md:right-6 top-0 h-full mt-2 sm:mt-0 md:mt-0 z-10 order-3 sm:order-none relative">
-          {!showLogin && !window.localStorage.getItem("userProfile") && (
-            <div className="w-auto flex justify-center">
-              <EntrarButton onClick={() => setShowLogin(true)} />
-            </div>
-          )}
-          {window.localStorage.getItem("userProfile") && <UserMenu />}
-        </div>
-      </header>
+      <Header
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        search={search}
+        setSearch={setSearch}
+        handleSearchSubmit={handleSearchSubmit}
+        UserMenu={UserMenu}
+      />
       {/* Carrusel destacado */}
       <div className="w-full flex justify-center mb-8">
         <Carrusel
