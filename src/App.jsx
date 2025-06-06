@@ -19,15 +19,44 @@ function App() {
   const [showCart, setShowCart] = useState(false);
   const [search, setSearch] = useState("");
   const [searchActive, setSearchActive] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
   const cartButtonRef = useRef();
-  const { cart } = useProductStore();
+  const { cart, products, fetchProducts, addToCart } = useProductStore();
+
+  // Buscar productos en tiempo real
+  useEffect(() => {
+    if (!products.length) fetchProducts();
+  }, []);
 
   useEffect(() => {
-    window.setShowProfile = setShowProfile;
-    return () => {
-      window.setShowProfile = undefined;
+    if (search.trim() === "") {
+      setSearchResults([]);
+      setShowSearchResults(false);
+      setSearchActive(false);
+      return;
+    }
+    // Filtrar productos
+    const filtered = products.filter((p) =>
+      p.title.toLowerCase().includes(search.toLowerCase()) ||
+      (p.description && p.description.toLowerCase().includes(search.toLowerCase()))
+    );
+    setSearchResults(filtered);
+    setShowSearchResults(true);
+    setSearchActive(false);
+  }, [search, products]);
+
+  // Cerrar panel al hacer click fuera
+  useEffect(() => {
+    if (!showSearchResults) return;
+    const handleClick = (e) => {
+      if (!e.target.closest("#search-dropdown-panel") && !e.target.closest("#search-input-header")) {
+        setShowSearchResults(false);
+      }
     };
-  }, []);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showSearchResults]);
 
   // Función para pasar a ProductCatalog y abrir la cesta al agregar
   const handleAddAndShowCart = (product, addToCart) => {
@@ -47,6 +76,7 @@ function App() {
       return;
     }
     setSearchActive(true);
+    setShowSearchResults(true);
   };
 
   // Cuando se cambia el texto de búsqueda, desactiva el estado de búsqueda activa
@@ -63,6 +93,11 @@ function App() {
         setSearch={setSearch}
         handleSearchSubmit={handleSearchSubmit}
         UserMenu={UserMenu}
+        searchResults={searchResults}
+        showSearchResults={showSearchResults}
+        setShowSearchResults={setShowSearchResults}
+        onAddToCart={handleAddAndShowCart}
+        onSearchChange={handleSearchChange}
       />
       {/* Carrusel destacado */}
       <div className="w-full flex justify-center mb-8">

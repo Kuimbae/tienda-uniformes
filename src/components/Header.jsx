@@ -1,7 +1,7 @@
 import Logo from "./Logo.jsx";
 import EntrarButton from "./EntrarButton.jsx";
 
-function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu }) {
+function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu, searchResults = [], showSearchResults, setShowSearchResults, onAddToCart, onSearchChange }) {
   return (
     <>
       <header className="mb-2 bg-[#111112] bg-opacity-95 shadow-lg py-4 sm:py-6 md:py-8 px-2 sm:px-4 w-full flex flex-col items-center relative gap-2 md:gap-0">
@@ -37,12 +37,14 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
               style={{margin: 0, flex: 1}}
             >
               <input
+                id="search-input-header"
                 type="text"
                 value={search}
-                onChange={e => setSearch(e.target.value)}
+                onChange={onSearchChange}
                 placeholder="Buscar..."
                 className="flex-1 min-w-0 py-2 pl-4 pr-12 bg-gray-100 text-gray-900 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 text-base shadow-sm w-full !m-0"
                 style={{margin: 0, maxWidth: '100%'}}
+                autoComplete="off"
               />
               <button
                 type="submit"
@@ -62,6 +64,42 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                   <line x1="18" y1="18" x2="15.2" y2="15.2" stroke="white" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </button>
+              {/* Panel de resultados de búsqueda (desktop) */}
+              {showSearchResults && searchResults.length > 0 && (
+                <div
+                  id="search-dropdown-panel"
+                  className="absolute left-0 top-12 w-[32rem] min-w-[20rem] max-w-[90vw] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-[28rem] overflow-y-auto mt-1"
+                  style={{width: '32rem'}}
+                >
+                  {searchResults.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex items-center gap-3 px-3 py-2 hover:bg-pink-50 cursor-pointer border-b last:border-b-0"
+                      onClick={() => {
+                        setSearch(product.title);
+                        setShowSearchResults(false);
+                        // Opcional: navegar al catálogo filtrado o mostrar detalle
+                      }}
+                    >
+                      <img src={product.thumbnail} alt={product.title} className="w-10 h-10 object-cover rounded" />
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900 text-sm">{product.title}</div>
+                        <div className="text-xs text-gray-500 line-clamp-1">{product.description}</div>
+                      </div>
+                      <button
+                        className="bg-green-700 text-white px-3 py-1 rounded font-semibold text-xs hover:bg-green-800 transition"
+                        onClick={e => {
+                          e.stopPropagation();
+                          onAddToCart(product);
+                        }}
+                      >Añadir</button>
+                    </div>
+                  ))}
+                  {searchResults.length === 0 && (
+                    <div className="px-3 py-2 text-gray-500 text-sm">No se encontraron productos.</div>
+                  )}
+                </div>
+              )}
             </form>
             <div className="flex-shrink-0 ml-1 sm:ml-2 flex items-center h-full">
               {!showLogin && !window.localStorage.getItem("userProfile") && (
@@ -79,12 +117,14 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
             style={{margin: 0}}
           >
             <input
+              id="search-input-header"
               type="text"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={onSearchChange}
               placeholder="Buscar..."
               className="flex-1 py-2 pl-4 pr-12 bg-gray-100 text-gray-900 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 text-base shadow-sm min-w-0 w-full !m-0"
               style={{margin: 0}}
+              autoComplete="off"
             />
             <button
               type="submit"
@@ -104,6 +144,41 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                 <line x1="18" y1="18" x2="15.2" y2="15.2" stroke="white" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>
+            {/* Panel de resultados de búsqueda (móvil) */}
+            {showSearchResults && searchResults.length > 0 && (
+              <div
+                id="search-dropdown-panel"
+                className="absolute left-0 top-12 w-[95vw] min-w-[16rem] max-w-[99vw] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-[24rem] overflow-y-auto mt-1"
+                style={{width: '95vw'}}
+              >
+                {searchResults.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center gap-3 px-3 py-2 hover:bg-pink-50 cursor-pointer border-b last:border-b-0"
+                    onClick={() => {
+                      setSearch(product.title);
+                      setShowSearchResults(false);
+                    }}
+                  >
+                    <img src={product.thumbnail} alt={product.title} className="w-10 h-10 object-cover rounded" />
+                    <div className="flex-1">
+                      <div className="font-semibold text-gray-900 text-sm">{product.title}</div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{product.description}</div>
+                    </div>
+                    <button
+                      className="bg-green-700 text-white px-3 py-1 rounded font-semibold text-xs hover:bg-green-800 transition"
+                      onClick={e => {
+                        e.stopPropagation();
+                        onAddToCart(product);
+                      }}
+                    >Añadir</button>
+                  </div>
+                ))}
+                {searchResults.length === 0 && (
+                  <div className="px-3 py-2 text-gray-500 text-sm">No se encontraron productos.</div>
+                )}
+              </div>
+            )}
           </form>
           <div className="flex-shrink-0 ml-1 flex items-center h-full">
             {!showLogin && !window.localStorage.getItem("userProfile") && (
