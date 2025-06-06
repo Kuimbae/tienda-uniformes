@@ -1,7 +1,7 @@
 import Logo from "./Logo.jsx";
 import EntrarButton from "./EntrarButton.jsx";
 
-function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu, searchResults = [], showSearchResults, setShowSearchResults, onAddToCart, onSearchChange }) {
+function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu, searchResults = [], showSearchResults, setShowSearchResults, onAddToCart, onSearchChange, setShowProfile }) {
   return (
     <>
       <header className="mb-2 bg-[#111112] bg-opacity-95 shadow-lg py-4 sm:py-6 md:py-8 px-2 sm:px-4 w-full flex flex-col items-center relative gap-2 md:gap-0">
@@ -105,7 +105,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
               {!showLogin && !window.localStorage.getItem("userProfile") && (
                 <EntrarButton onClick={() => setShowLogin(true)} />
               )}
-              {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu />}
+              {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu setShowProfile={setShowProfile} />}
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
             {!showLogin && !window.localStorage.getItem("userProfile") && (
               <EntrarButton onClick={() => setShowLogin(true)} />
             )}
-            {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu />}
+            {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu setShowProfile={setShowProfile} />}
           </div>
         </div>
       </header>

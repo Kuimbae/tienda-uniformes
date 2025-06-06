@@ -92,7 +92,8 @@ function App() {
         search={search}
         setSearch={setSearch}
         handleSearchSubmit={handleSearchSubmit}
-        UserMenu={UserMenu}
+        UserMenu={(props) => <UserMenu {...props} />}
+        setShowProfile={setShowProfile}
         searchResults={searchResults}
         showSearchResults={showSearchResults}
         setShowSearchResults={setShowSearchResults}
@@ -184,10 +185,9 @@ function App() {
   );
 }
 
-function UserMenu() {
+function UserMenu({ setShowProfile }) {
   const [open, setOpen] = useState(false);
   const user = JSON.parse(window.localStorage.getItem("userProfile"));
-  const setShowProfile = window.setShowProfile;
 
   // Cierra el menú al hacer click fuera
   useEffect(() => {
@@ -225,7 +225,7 @@ function UserMenu() {
             className="flex items-center gap-2 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition"
             onClick={() => {
               setOpen(false);
-              window.setShowProfile(true);
+              setShowProfile(true);
             }}
             aria-label="Perfil de usuario"
           >
