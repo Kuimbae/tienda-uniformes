@@ -14,14 +14,14 @@ const slides = [
     color: '#e6007e',
   },
   {
-    image: '/imagen/chico.jpg',
+    image: '/imagen/oferta.jpg',
     title: 'Ofertas Especiales',
     description: 'Descuentos de hasta el 50%',
     button: 'Aprovechar ahora',
     color: '#1e293b',
   },
   {
-    image: '/imagen/oferta.jpg',
+    image: '/imagen/chico.jpg',
     title: 'Estilo Único',
     description: 'Lo mejor de la moda urbana',
     button: 'Explorar',
@@ -70,7 +70,7 @@ export default function HeroCarousel() {
             {/* Overlay de color semitransparente */}
             <div
               className="absolute inset-0"
-              style={{ backgroundColor: `${slide.color}66` }} 
+              style={{ backgroundColor: `${slide.color}33` }} 
             ></div>
 
             <AnimatePresence mode="wait">
