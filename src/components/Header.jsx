@@ -29,10 +29,10 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
               <span className="inline-block animate-bounce-slow">S</span>ofi <span className="inline-block animate-bounce-slow delay-150">C</span>onfecciones
             </h1>
           </div>
-          {/* Buscador y usuario a la derecha SOLO en pantallas medianas o mayores */}
-          <div className="hidden sm:flex flex-shrink-0 items-center gap-1 sm:gap-2 min-w-0 max-w-[60vw] sm:max-w-[220px] md:max-w-[320px] justify-end z-10 ml-auto">
+          {/* Buscador y usuario a la derecha SOLO en escritorio */}
+          <div className="hidden lg:flex flex-shrink-0 items-center gap-2 min-w-0 max-w-[60vw] lg:max-w-[320px] justify-end z-10 ml-auto">
             <form
-              className="flex flex-row items-center gap-1 sm:gap-2 w-full min-w-0 max-w-full relative"
+              className="flex flex-row items-center gap-2 w-full min-w-0 max-w-full relative"
               onSubmit={handleSearchSubmit}
               style={{margin: 0, flex: 1, justifyContent: 'flex-end'}}
             >
@@ -109,7 +109,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                 </div>
               )}
             </form>
-            <div className="flex-shrink-0 ml-1 sm:ml-2 flex items-center h-full">
+            <div className="flex-shrink-0 ml-2 flex items-center h-full">
               {!showLogin && !window.localStorage.getItem("userProfile") && (
                 <EntrarButton onClick={() => setShowLogin(true)} />
               )}
@@ -117,8 +117,16 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
             </div>
           </div>
         </div>
-        {/* Buscador y usuario DEBAJO del título en móvil */}
-        <div className="flex sm:hidden w-full flex-row items-center justify-center gap-2 mt-2">
+        {/* Buscador y usuario DEBAJO del título en móvil y tablet (hasta 1023px) */}
+        <div className="flex lg:hidden w-full flex-col items-center justify-center gap-2 mt-2">
+          <div className="flex flex-row items-center justify-center w-full gap-2">
+            <div className="flex-shrink-0 flex items-center h-full w-full justify-center">
+              {!showLogin && !window.localStorage.getItem("userProfile") && (
+                <EntrarButton onClick={() => setShowLogin(true)} />
+              )}
+              {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu setShowProfile={setShowProfile} />}
+            </div>
+          </div>
           <form
             className="flex flex-row items-center gap-2 w-full max-w-xs relative"
             onSubmit={handleSearchSubmit}
@@ -152,7 +160,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                 <line x1="18" y1="18" x2="15.2" y2="15.2" stroke="white" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>
-            {/* Panel de resultados de búsqueda (móvil) */}
+            {/* Panel de resultados de búsqueda (móvil/tablet) */}
             {showSearchResults && searchResults.length > 0 && (
               <div
                 id="search-dropdown-panel"
@@ -198,12 +206,6 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
               </div>
             )}
           </form>
-          <div className="flex-shrink-0 ml-1 flex items-center h-full">
-            {!showLogin && !window.localStorage.getItem("userProfile") && (
-              <EntrarButton onClick={() => setShowLogin(true)} />
-            )}
-            {window.localStorage.getItem("userProfile") && UserMenu && <UserMenu setShowProfile={setShowProfile} />}
-          </div>
         </div>
       </header>
       {/* Menú de navegación debajo del header, letras pequeñas */}
