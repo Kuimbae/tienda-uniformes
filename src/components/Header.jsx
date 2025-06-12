@@ -26,7 +26,7 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                 textAlign: 'center'
               }}
             >
-              <span className="inline-block animate-bounce-slow">S</span>ofi <span className="inline-block animate-bounce-slow delay-150">C</span>onfecciones
+              Sofi Confecciones
             </h1>
           </div>
           {/* Buscador y usuario a la derecha SOLO en escritorio */}
