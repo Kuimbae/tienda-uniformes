@@ -178,9 +178,15 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
                       onClick={e => {
                         e.stopPropagation();
                         if (typeof onAddToCart === 'function') {
-                          onAddToCart(product, undefined);
-                        } else if (window.addToCart) {
-                          window.addToCart(product);
+                          onAddToCart(product, (p) => {
+                            import('../store/useProductStore.jsx').then(mod => {
+                              mod.useProductStore.getState().addToCart(p);
+                            });
+                          });
+                        } else {
+                          import('../store/useProductStore.jsx').then(mod => {
+                            mod.useProductStore.getState().addToCart(product);
+                          });
                         }
                       }}
                     >Añadir</button>
