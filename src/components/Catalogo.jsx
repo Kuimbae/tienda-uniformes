@@ -1,6 +1,6 @@
 import ProductCatalog from "./ProductCatalog.jsx";
 
-export default function Catalogo({ onBack }) {
+export default function Catalogo({ onBack, onAddToCart }) {
   return (
     <section id="catalogo" className="w-full max-w-7xl mx-auto my-8 px-4">
       <h2 className="text-2xl font-bold mb-4 text-pink-700">Catálogo</h2>
@@ -10,7 +10,7 @@ export default function Catalogo({ onBack }) {
       >
         Volver a inicio
       </button>
-      <ProductCatalog />
+      <ProductCatalog onAddToCart={onAddToCart} />
     </section>
   );
 }

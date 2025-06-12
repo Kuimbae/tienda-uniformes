@@ -122,12 +122,23 @@ function App() {
           </div>
           <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8 overflow-x-hidden">
             <div className="transition-shadow hover:shadow-2xl rounded-xl flex-1 md:w-2/3 lg:w-2/3 w-full">
-              <ProductCatalog onAddToCart={handleAddAndShowCart} search={searchActive ? search : ""} />
+              <ProductCatalog 
+                onAddToCart={(product, addToCart) => {
+                  addToCart(product);
+                  setShowCart(true);
+                }} 
+                search={searchActive ? search : ""} 
+              />
             </div>
           </main>
         </>
       )}
-      {activeSection === "catalogo" && <Catalogo onBack={() => setActiveSection("inicio")} />}
+      {activeSection === "catalogo" && (
+        <Catalogo 
+          onBack={() => setActiveSection("inicio")}
+          onAddToCart={handleAddAndShowCart}
+        />
+      )}
       {activeSection === "bordados" && <Bordados onBack={() => setActiveSection("inicio")} />}
       {activeSection === "ofertas" && <Ofertas onBack={() => setActiveSection("inicio")} />}
       {activeSection === "contacto" && <Contacto onBack={() => setActiveSection("inicio")} />}
