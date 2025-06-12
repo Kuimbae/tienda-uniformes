@@ -12,9 +12,9 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
             <Logo className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 lg:w-28 lg:h-28" />
           </div>
           {/* Título perfectamente centrado absoluto */}
-          <div className="absolute left-0 right-0 flex justify-center items-center pointer-events-none select-none">
+          <div className="absolute left-1/4 right-0 flex justify-center items-center pointer-events-none select-none sm:left-0">
             <h1
-              className="text-center font-black italic font-serif drop-shadow-[0_8px_32px_rgba(230,0,126,0.25)] tracking-tight px-1 sm:px-2 mb-1 sm:mb-2 pb-1 sm:pb-2 pt-1 sm:pt-2 whitespace-nowrap overflow-visible text-ellipsis animate-gradient bg-gradient-to-r from-pink-600 via-fuchsia-500 to-blue-500 bg-clip-text text-transparent relative text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+              className="text-center font-black italic font-serif drop-shadow-[0_8px_32px_rgba(230,0,126,0.25)] tracking-tight px-1 sm:px-2 mb-1 sm:mb-2 pb-1 sm:pb-2 pt-1 sm:pt-2 whitespace-nowrap overflow-visible text-ellipsis animate-gradient bg-gradient-to-r from-pink-600 via-fuchsia-500 to-blue-500 bg-clip-text text-transparent relative text-4xl xs:text-5xl sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl"
               style={{
                 fontFamily: 'Great Vibes, cursive',
                 letterSpacing: '0.06em',
