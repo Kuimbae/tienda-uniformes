@@ -1,7 +1,7 @@
 import Logo from "./Logo.jsx";
 import EntrarButton from "./EntrarButton.jsx";
 
-function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu, searchResults = [], showSearchResults, setShowSearchResults, onAddToCart, onSearchChange, setShowProfile }) {
+function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit, UserMenu, searchResults = [], showSearchResults, setShowSearchResults, onAddToCart, onSearchChange, setShowProfile, setActiveSection }) {
   return (
     <>
       <header className="mb-2 bg-[#111112] bg-opacity-95 shadow-lg py-4 sm:py-6 md:py-8 px-2 sm:px-4 w-full flex flex-col items-center relative gap-2 md:gap-0">
@@ -208,10 +208,10 @@ function Header({ showLogin, setShowLogin, search, setSearch, handleSearchSubmit
       </header>
       {/* Menú de navegación debajo del header, letras pequeñas */}
       <nav className="w-full flex justify-center items-center gap-6 mt-0 mb-6">
-        <a href="#catalogo" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase">Catálogo</a>
-        <a href="#bordados" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase">Bordados</a>
-        <a href="#ofertas" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase">Ofertas</a>
-        <a href="#contacto" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase">Contacto</a>
+        <a href="#catalogo" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase" onClick={e => { e.preventDefault(); setActiveSection("catalogo"); }}>Catálogo</a>
+        <a href="#bordados" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase" onClick={e => { e.preventDefault(); setActiveSection("bordados"); }}>Bordados</a>
+        <a href="#ofertas" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase" onClick={e => { e.preventDefault(); setActiveSection("ofertas"); }}>Ofertas</a>
+        <a href="#contacto" className="text-xs font-medium text-pink-600 hover:text-fuchsia-600 transition tracking-wide uppercase" onClick={e => { e.preventDefault(); setActiveSection("contacto"); }}>Contacto</a>
       </nav>
     </>
   );

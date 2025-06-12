@@ -10,6 +10,10 @@ import { useProductStore } from "./store/useProductStore.jsx";
 import Cesta from "./components/Cesta.jsx";
 import Carrusel from "./components/Carrusel.jsx";
 import Header from "./components/Header.jsx";
+import Catalogo from "./components/Catalogo.jsx";
+import Bordados from "./components/Bordados.jsx";
+import Ofertas from "./components/Ofertas.jsx";
+import Contacto from "./components/Contacto.jsx";
 import './styles/marijoa.css';
 
 function App() {
@@ -21,6 +25,7 @@ function App() {
   const [searchActive, setSearchActive] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
   const cartButtonRef = useRef();
   const { cart, products, fetchProducts, addToCart } = useProductStore();
 
@@ -99,82 +104,90 @@ function App() {
         setShowSearchResults={setShowSearchResults}
         onAddToCart={handleAddAndShowCart}
         onSearchChange={handleSearchChange}
+        setActiveSection={setActiveSection}
       />
-      {/* Carrusel destacado */}
-      <div className="w-full flex justify-center mb-8">
-        <Carrusel
-          images={[
-            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 1" },
-            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 2" },
-            { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 3" }
-          ]}
-          autoPlay={true}
-          height="260px"
-        />
-      </div>
+      {/* Carrusel destacado solo en inicio */}
+      {activeSection === "inicio" && (
+        <>
+          <div className="w-full flex justify-center mb-8">
+            <Carrusel
+              images={[
+                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 1" },
+                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 2" },
+                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 3" }
+              ]}
+              autoPlay={true}
+              height="260px"
+            />
+          </div>
+          <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8 overflow-x-hidden">
+            <div className="transition-shadow hover:shadow-2xl rounded-xl flex-1 md:w-2/3 lg:w-2/3 w-full">
+              <ProductCatalog onAddToCart={handleAddAndShowCart} search={searchActive ? search : ""} />
+            </div>
+          </main>
+        </>
+      )}
+      {activeSection === "catalogo" && <Catalogo onBack={() => setActiveSection("inicio")} />}
+      {activeSection === "bordados" && <Bordados onBack={() => setActiveSection("inicio")} />}
+      {activeSection === "ofertas" && <Ofertas onBack={() => setActiveSection("inicio")} />}
+      {activeSection === "contacto" && <Contacto onBack={() => setActiveSection("inicio")} />}
       <Modal open={showLogin} onClose={() => setShowLogin(false)}>
         <LoginForm onLogin={() => setShowLogin(false)} />
       </Modal>
       <Modal open={showProfile} onClose={() => setShowProfile(false)} hideClose>
         <Profile onClose={() => setShowProfile(false)} />
       </Modal>
-
-      <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col md:flex-row gap-8 overflow-x-hidden">
-        <div className="transition-shadow hover:shadow-2xl rounded-xl flex-1 md:w-2/3 lg:w-2/3 w-full">
-          <ProductCatalog onAddToCart={handleAddAndShowCart} search={searchActive ? search : ""} />
-        </div>
-        {/* Botón flotante para abrir la cesta */}
-        <button
-          ref={cartButtonRef}
-          className="fixed right-4 z-50 bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition flex items-center gap-2 bottom-44"
-          onClick={() => setShowCart(true)}
+      {/* Botón flotante para abrir la cesta */}
+      <button
+        ref={cartButtonRef}
+        className="fixed right-4 z-50 bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition flex items-center gap-2 bottom-44"
+        onClick={() => setShowCart(true)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 6.75h1.386a.75.75 0 0 1 .728.573l1.272 5.09a2.25 2.25 0 0 0 2.186 1.762h7.456a2.25 2.25 0 0 0 2.186-1.762l1.272-5.09a.75.75 0 0 1 .728-.573h1.386"
-            />
-            <circle cx="8.25" cy="19.5" r="1.25" />
-            <circle cx="17.25" cy="19.5" r="1.25" />
-          </svg>
-          Cesta
-          {cart.length > 0 && (
-            <span className="ml-2 bg-green-600 text-white rounded-full px-2 py-0.5 text-xs font-bold min-w-6 text-center">
-              {cart.reduce((acc, item) => acc + (item.quantity || 1), 0)}
-            </span>
-          )}
-        </button>
-        {/* El botón flotante para elegir bordado permanece igual */}
-        <button
-          className="fixed right-4 z-40 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition flex items-center gap-2 bottom-28"
-          onClick={() => setShowEmbroidery(true)}
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 6.75h1.386a.75.75 0 0 1 .728.573l1.272 5.09a2.25 2.25 0 0 0 2.186 1.762h7.456a2.25 2.25 0 0 0 2.186-1.762l1.272-5.09a.75.75 0 0 1 .728-.573h1.386"
+          />
+          <circle cx="8.25" cy="19.5" r="1.25" />
+          <circle cx="17.25" cy="19.5" r="1.25" />
+        </svg>
+        Cesta
+        {cart.length > 0 && (
+          <span className="ml-2 bg-green-600 text-white rounded-full px-2 py-0.5 text-xs font-bold min-w-6 text-center">
+            {cart.reduce((acc, item) => acc + (item.quantity || 1), 0)}
+          </span>
+        )}
+      </button>
+      {/* El botón flotante para elegir bordado permanece igual */}
+      <button
+        className="fixed right-4 z-40 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition flex items-center gap-2 bottom-28"
+        onClick={() => setShowEmbroidery(true)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
-          Elegir bordado
-        </button>
-        {/* El espacio del modal de bordado ya no se muestra en desktop */}
-      </main>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+        Elegir bordado
+      </button>
+      {/* El espacio del modal de bordado ya no se muestra en desktop */}
       {/* Panel lateral de la cesta */}
       <Cesta open={showCart} onClose={() => setShowCart(false)} />
       <Modal open={showEmbroidery} onClose={() => setShowEmbroidery(false)}>
