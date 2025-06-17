@@ -68,7 +68,7 @@ export default function CestaResumen() {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <div className="flex flex-col items-center mb-6">
-        <img src="/imagen/Sofia.svg" alt="Logo Sofi Confecciones" className="w-32 h-32 object-contain mb-2 print:mb-0" />
+        <img src={`${import.meta.env.BASE_URL}imagen/Sofia.svg`} alt="Logo Sofi Confecciones" className="w-32 h-32 object-contain mb-2 print:mb-0" />
         <h2 className="text-2xl font-bold text-blue-900 text-center print:mt-2">Artículos en tu cesta</h2>
       </div>
       {/* Datos del usuario para la factura */}

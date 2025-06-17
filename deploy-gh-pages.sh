@@ -18,8 +18,8 @@ git commit -m "Deploy to GitHub Pages"
 
 # 4. Forzar push a la rama gh-pages (reemplaza USUARIO y REPO por los tuyos)
 # Obtén la URL del repo automáticamente
-git remote add origin $(git -C .. remote get-url origin)
-git branch -M gh-pages
+#git remote add origin $(git -C .. remote get-url origin)
+#git branch -M gh-pages
 git push -f origin gh-pages
 
 echo "¡Deploy completado! Accede a: https://kuimbae.github.io/tienda-uniformes/"

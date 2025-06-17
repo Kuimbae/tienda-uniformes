@@ -112,9 +112,9 @@ function App() {
           <div className="w-full flex justify-center mb-8">
             <Carrusel
               images={[
-                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 1" },
-                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 2" },
-                { src: "/imagen/Sofia.svg", alt: "Uniforme Sofi 3" }
+                { src: `${import.meta.env.BASE_URL}imagen/Sofia.svg`, alt: "Uniforme Sofi 1" },
+                { src: `${import.meta.env.BASE_URL}imagen/Sofia.svg`, alt: "Uniforme Sofi 2" },
+                { src: `${import.meta.env.BASE_URL}imagen/Sofia.svg`, alt: "Uniforme Sofi 3" }
               ]}
               autoPlay={true}
               height="260px"

@@ -11,7 +11,7 @@ export default function Contacto({ onBack }) {
     const form = e.target;
     const data = new FormData(form);
     try {
-      const res = await fetch("https://formsubmit.co/sofi@confecciones.com", {
+      const res = await fetch("https://formsubmit.co/delgadofleitas@hotmail.com", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
