@@ -7,21 +7,21 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const slides = [
   {
-    image: '/imagen/chica.jpg',
+    image: `${import.meta.env.BASE_URL}imagen/chica.jpg`,
     title: 'Nueva Temporada',
     description: 'Descubrí lo nuevo en moda femenina',
     button: 'Ver colección',
     color: '#e6007e',
   },
   {
-    image: '/imagen/oferta.jpg',
+    image: `${import.meta.env.BASE_URL}imagen/oferta.jpg`,
     title: 'Ofertas Especiales',
     description: 'Descuentos de hasta el 50%',
     button: 'Aprovechar ahora',
     color: '#1e293b',
   },
   {
-    image: '/imagen/chico.jpg',
+    image: `${import.meta.env.BASE_URL}imagen/chico.jpg`,
     title: 'Estilo Único',
     description: 'Lo mejor de la moda urbana',
     button: 'Explorar',
