@@ -1,9 +1,13 @@
 import { useState } from "react";
 import RegisterForm from "./RegisterForm.jsx";
 
+// Leer usuario y contraseña por defecto desde variables de entorno
+const defaultUser = import.meta.env.VITE_DEFAULT_USER || "";
+const defaultPass = import.meta.env.VITE_DEFAULT_PASS || "";
+
 export default function LoginForm({ onLogin }) {
-  const [username, setUsername] = useState("emilys");
-  const [password, setPassword] = useState("emilyspass");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [user, setUser] = useState(null);
