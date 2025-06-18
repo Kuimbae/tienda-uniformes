@@ -107,10 +107,7 @@ export default function Contacto({ onBack }) {
           </div>
         )}
       </form>
-      /*
-        Estilos para el autocompletado de los inputs en navegadores Webkit (Chrome, Edge, Safari):
-        Forzamos el fondo negro y el texto blanco en el autocompletado.
-      */
+      
       <style jsx global>{`
         input:-webkit-autofill,
         input:-webkit-autofill:focus,
