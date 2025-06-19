@@ -99,6 +99,20 @@ function App() {
     return () => { window.setActiveSection = () => {}; };
   }, []);
 
+  // Manejar navegación por hash para GitHub Pages
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (["catalogo", "ofertas", "bordados", "contacto", "inicio"].includes(hash)) {
+        setActiveSection(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    // Al cargar la página, si hay hash, navegar a la sección
+    handleHashChange();
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   return (
     <div className="min-h-full w-full bg-[#e5e7eb] p-0 flex flex-col justify-between items-center">
       <Header
