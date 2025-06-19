@@ -89,6 +89,16 @@ function App() {
     if (search === "") setSearchActive(false);
   }, [search]);
 
+  // Permitir que el carrusel cambie la sección activa
+  useEffect(() => {
+    window.setActiveSection = (section) => {
+      setActiveSection(section);
+      // Forzar scroll al top para mejor UX
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    return () => { window.setActiveSection = () => {}; };
+  }, []);
+
   return (
     <div className="min-h-full w-full bg-[#e5e7eb] p-0 flex flex-col justify-between items-center">
       <Header
