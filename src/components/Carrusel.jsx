@@ -100,10 +100,18 @@ export default function HeroCarousel() {
                     whileTap={{ scale: 0.97 }}
                     className="mt-4 px-8 py-3 bg-white/20 text-white font-semibold rounded-full shadow-lg hover:bg-white/40 border border-white transition"
                     onClick={() => {
-                      if (slide.button === 'Ver colección' || slide.button === 'Explorar') {
-                        window.location.hash = '#catalogo';
-                      } else if (slide.button === 'Aprovechar ahora') {
-                        window.location.hash = '#ofertas';
+                      if (typeof window.setActiveSection === 'function') {
+                        if (slide.button === 'Ver colección' || slide.button === 'Explorar') {
+                          window.setActiveSection('catalogo');
+                        } else if (slide.button === 'Aprovechar ahora') {
+                          window.setActiveSection('ofertas');
+                        }
+                      } else {
+                        if (slide.button === 'Ver colección' || slide.button === 'Explorar') {
+                          window.location.hash = '#catalogo';
+                        } else if (slide.button === 'Aprovechar ahora') {
+                          window.location.hash = '#ofertas';
+                        }
                       }
                     }}
                   >
