@@ -101,15 +101,9 @@ export default function HeroCarousel() {
                     className="mt-4 px-8 py-3 bg-white/20 text-white font-semibold rounded-full shadow-lg hover:bg-white/40 border border-white transition"
                     onClick={() => {
                       if (slide.button === 'Ver colección' || slide.button === 'Explorar') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        if (typeof window.setActiveSection === 'function') {
-                          window.setActiveSection('catalogo');
-                        }
+                        window.location.hash = '#catalogo';
                       } else if (slide.button === 'Aprovechar ahora') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        if (typeof window.setActiveSection === 'function') {
-                          window.setActiveSection('ofertas');
-                        }
+                        window.location.hash = '#ofertas';
                       }
                     }}
                   >
