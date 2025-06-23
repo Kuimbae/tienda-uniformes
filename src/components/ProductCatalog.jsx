@@ -4,6 +4,8 @@ import { useProductStore } from '../store/useProductStore.jsx';
 export default function ProductCatalog({ onAddToCart, search = "" }) {
   const { products, fetchProducts, addToCart, isLoading, error } = useProductStore();
   const [addedId, setAddedId] = useState(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 6;
 
   useEffect(() => {
     fetchProducts();
@@ -17,6 +19,11 @@ export default function ProductCatalog({ onAddToCart, search = "" }) {
       )
     : products;
 
+  // Paginación
+  const totalPages = Math.ceil(filteredProducts.length / pageSize) || 1;
+  // Mostrar productos desde el inicio hasta el final de la página seleccionada
+  const paginatedProducts = filteredProducts.slice(0, page * pageSize);
+
   const handleAdd = (product) => {
     if (onAddToCart) {
       onAddToCart(product, addToCart);
@@ -27,6 +34,14 @@ export default function ProductCatalog({ onAddToCart, search = "" }) {
     setTimeout(() => setAddedId(null), 1000);
   };
 
+  // Cambiar de página y volver arriba
+  const goToPage = (p) => {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => { setPage(1); }, [search]); // Reinicia a la página 1 al buscar
+
   if (isLoading) return <div className="p-6">Cargando productos...</div>;
   if (error) return <div className="p-6 text-red-500">{error}</div>;
 
@@ -34,10 +49,10 @@ export default function ProductCatalog({ onAddToCart, search = "" }) {
     <div className="bg-white p-6 rounded-xl shadow w-full product-card">
       <h2 className="text-xl font-bold mb-4">Catálogo</h2>
       <div className="grid grid-cols-2 gap-4">
-        {filteredProducts.length === 0 ? (
+        {paginatedProducts.length === 0 ? (
           <div className="col-span-2 text-center text-gray-500 py-8">No se encontraron productos.</div>
         ) : (
-          filteredProducts.map((product) => (
+          paginatedProducts.map((product) => (
             <div key={product.id} className="text-center product-card">
               <img
                 src={product.thumbnail}
@@ -58,6 +73,20 @@ export default function ProductCatalog({ onAddToCart, search = "" }) {
           ))
         )}
       </div>
+      {/* Controles de paginación */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              className={`px-3 py-1 rounded font-semibold ${page === i + 1 ? 'bg-pink-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-pink-100'}`}
+              onClick={() => goToPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
