@@ -55,7 +55,7 @@ export default function Profile({ onClose }) {
     <div className="bg-white p-6 pt-10 rounded-lg w-full max-w-md mx-auto relative text-gray-900">
       <button
         type="button"
-        className="fixed md:absolute top-4 right-4 md:top-2 md:right-2 flex items-center justify-center w-7 h-7 bg-white border border-gray-300 rounded hover:bg-red-500 hover:text-white text-gray-700 text-base font-bold shadow transition-all duration-150 z-50"
+        className="absolute top-2 right-2 flex items-center justify-center w-7 h-7 bg-white border border-gray-300 rounded hover:bg-red-500 hover:text-white text-gray-700 text-base font-bold shadow transition-all duration-150 z-20"
         style={{ lineHeight: 1, padding: 0 }}
         onClick={onClose}
         aria-label="Cerrar"
