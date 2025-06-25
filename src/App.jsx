@@ -18,6 +18,17 @@ import UserMenu from "./components/UserMenu.jsx";
 import Profile from "./components/Profile.jsx";
 import './styles/marijoa.css';
 
+// Hook para detectar si es móvil (menos de 768px)
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return isMobile;
+}
+
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showEmbroidery, setShowEmbroidery] = useState(false);
@@ -30,6 +41,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("inicio");
   const cartButtonRef = useRef();
   const { cart, products, fetchProducts, addToCart } = useProductStore();
+  const isMobile = useIsMobile();
 
   // Buscar productos en tiempo real
   useEffect(() => {
@@ -174,10 +186,18 @@ function App() {
       <Modal open={showProfile} onClose={() => setShowProfile(false)} hideClose>
         <Profile onClose={() => setShowProfile(false)} />
       </Modal>
-      {/* Botón flotante para abrir la cesta */}
+      {/* Botón flotante para abrir la cesta (lengua en móvil, normal en escritorio) */}
       <button
         ref={cartButtonRef}
-        className="fixed right-4 z-50 bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition flex items-center gap-2 bottom-44"
+        className={`fixed right-0 z-50 bg-green-700 text-white font-semibold shadow-lg transition flex items-center gap-2 bottom-44
+          ${isMobile
+            ? 'px-3 py-2 rounded-l-full hover:bg-green-800' // compacto móvil
+            : 'px-6 py-3 rounded-full right-4 hover:bg-green-800'}
+        `}
+        style={isMobile
+          ? { minWidth: '40px', minHeight: '48px', transition: 'none', transform: 'none' }
+          : { minWidth: '56px', minHeight: '56px', transform: 'none', transition: 'none' }
+        }
         onClick={() => setShowCart(true)}
       >
         <svg
@@ -196,16 +216,28 @@ function App() {
           <circle cx="8.25" cy="19.5" r="1.25" />
           <circle cx="17.25" cy="19.5" r="1.25" />
         </svg>
-        Cesta
+        {isMobile ? (
+          <span className="sr-only">Cesta</span>
+        ) : (
+          <span className="inline">Cesta</span>
+        )}
         {cart.length > 0 && (
           <span className="ml-2 bg-green-600 text-white rounded-full px-2 py-0.5 text-xs font-bold min-w-6 text-center">
             {cart.reduce((acc, item) => acc + (item.quantity || 1), 0)}
           </span>
         )}
       </button>
-      {/* El botón flotante para elegir bordado permanece igual */}
+      {/* Botón flotante para elegir bordado (lengua en móvil, normal en escritorio) */}
       <button
-        className="fixed right-4 z-40 bg-blue-800 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition flex items-center gap-2 bottom-28"
+        className={`fixed right-0 z-40 bg-blue-800 text-white font-semibold shadow-lg transition flex items-center gap-2 bottom-28
+          ${isMobile
+            ? 'px-3 py-2 rounded-l-full hover:bg-blue-900'
+            : 'px-6 py-3 rounded-full right-4 hover:bg-blue-900'}
+        `}
+        style={isMobile
+          ? { minWidth: '40px', minHeight: '48px', transition: 'none', transform: 'none' }
+          : { minWidth: '56px', minHeight: '56px', transform: 'none', transition: 'none' }
+        }
         onClick={() => setShowEmbroidery(true)}
       >
         <svg
@@ -222,7 +254,11 @@ function App() {
             d="M12 4.5v15m7.5-7.5h-15"
           />
         </svg>
-        Elegir bordado
+        {isMobile ? (
+          <span className="sr-only">Elegir bordado</span>
+        ) : (
+          <span className="inline">Elegir bordado</span>
+        )}
       </button>
       {/* El espacio del modal de bordado ya no se muestra en desktop */}
       {/* Panel lateral de la cesta */}
